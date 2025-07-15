@@ -250,3 +250,8 @@ h6 {
 .preparation-steps{
     padding: var(--spacing-gutter-medium);
 }
+
+/* Pagina 404 */
+.center {
+    text-align: center;
+}
