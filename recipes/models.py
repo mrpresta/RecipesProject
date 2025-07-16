@@ -15,7 +15,7 @@ class Recipe(models.Model):
     preparation_time = models.IntegerField()
     preparation_time_unit = models.CharField(max_length=65)
     servings_steps = models.IntegerField()
-    servings_steps_unit = models.CharField(max_length=65),
+    servings_steps_unit = models.CharField(max_length=65, blank=True, null=True)
     preparation_steps = models.TextField()
     preparation_steps_is_html = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
