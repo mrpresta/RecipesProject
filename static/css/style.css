@@ -370,7 +370,7 @@ h6 {
 }
 
 .form-group button{
-    margin:0 auto;
+    margin: 1rem auto;
     width: 64rem;
     border-radius: 0.5rem;
     color: var(--color-white);
@@ -380,8 +380,8 @@ h6 {
     border: none;
     font-size: 1.6rem;
     letter-spacing: 0.1rem;
-
 }
+
 .form-group button:hover{
     filter: brightness(2);
 }

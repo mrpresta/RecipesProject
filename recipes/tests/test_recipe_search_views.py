@@ -40,8 +40,8 @@ class RecipeSearchViewsTest(RecipeTestBase):
         title1 = 'this is title one'
         title2 = 'this is title two'
 
-        recipe1 = self.make_recipe(slug='one', tittle=title1)
-        recipe2 = self.make_recipe(slug='two', tittle=title2)
+        recipe1 = self.make_recipe(slug='one', tittle=title1, author=self.make_user(username='user1'))
+        recipe2 = self.make_recipe(slug='two', tittle=title2, author=self.make_user(username='user2'))
 
         url = reverse('recipes:search')
 

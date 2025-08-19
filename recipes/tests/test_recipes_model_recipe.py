@@ -7,6 +7,7 @@ class RecipeModelTest(RecipeTestBase):
     def setUp(self):
         super().setUp()
         self.recipe = self.make_recipe()
+        self.category = self.make_category()
 
     def make_recipe_no_default(self):
         recipe = Recipe(
