@@ -63,7 +63,7 @@ class RecipeMixin:
         recipes = []
         for i in range(qtd):
             user = self.make_user(username=f'u{i}')
-            kwarg = {'slug': f'r{i}', 'author':user}
+            kwarg = {'tittle':f'Teste{i}','slug': f'r{i}', 'author':user}
             recipe = self.make_recipe(**kwarg)
             recipes.append(recipe)
         return recipes

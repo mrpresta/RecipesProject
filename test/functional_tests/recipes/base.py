@@ -5,8 +5,11 @@ import time
 
 class RecipeBaseFunctionTest(StaticLiveServerTestCase, RecipeMixin):
     def setUp(self):
-        self.browser = make_chrome_browser()
+        self.browser = make_chrome_browser('--headless')
         return super().setUp()
+
+    def setUp_with_recipes(self, qtd=10):
+        self.make_recipe_in_batch(qtd=qtd)
 
     def tearDown(self):
         self.browser.quit()

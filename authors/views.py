@@ -69,16 +69,18 @@ def login_create(request):
 
     return redirect(login_url)
 
-@login_required(login_url='author:login', redirect_field_name='next')
+@login_required(login_url='authors:login', redirect_field_name='next')
 def logout_view(request):
     if not request.POST:
+        messages.error(request, 'Invalid request')
         return redirect(reverse('authors:login'))
 
-    if request.POST.get('usarname') != request.user.username:
+    if request.POST.get('username') != request.user.username:
+        messages.error(request, 'Divergent User')
         return redirect(reverse('authors:login'))
 
     logout(request)
-    messages.warning(request, 'Usuário deslogado')
+    messages.success(request, 'Logout User')
     return redirect(reverse('authors:login'))
 
 def pagina_de_usuario(request):
