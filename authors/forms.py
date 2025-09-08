@@ -1,8 +1,11 @@
-
 import re
+from idlelib.debugobj import myrepr
+
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from recipes.models import Recipe, Category
+from collections import defaultdict
 
 def add_attr(field, attr_name, attr_new_val):
     existing = field.widget.attrs.get(attr_name, '')
@@ -132,3 +135,100 @@ class LoginForm(forms.Form):
         widget=forms.PasswordInput(),
         label='Senha'
     )
+
+class CadastrarReceitaForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.my_errors = defaultdict(list)
+
+
+
+        add_placeholder(self.fields['tittle'], 'Titulo')
+        add_placeholder(self.fields['description'], 'Descrição')
+        add_placeholder(self.fields['cover'], 'Capa')
+        add_placeholder(self.fields['category'], 'Categoria')
+        add_placeholder(self.fields['preparation_time'], 'Tempo de Preparo')
+        add_placeholder(self.fields['servings_steps'], 'Quantas Porções Rendem')
+        add_placeholder(self.fields['preparation_time_unit'], 'Ex.: Minutos, Hora, Horas')
+        add_placeholder(self.fields['preparation_steps'], 'Ingrediente e Passo a Passo de Preparo')
+
+
+    class Meta:
+        model = Recipe
+        fields = ['tittle','description', 'category', 'preparation_time', 'preparation_time_unit', 'servings_steps','cover', 'preparation_steps' ]
+
+    tittle = forms.CharField(
+        required=True,
+        label= 'Titulo da Receita',
+        error_messages={
+            'required': '* campo obrigratorio'
+        }
+    )
+
+    description = forms.CharField(
+        required=True,
+        label='Descrição ',
+    )
+
+    porcoes_choices = [(porcoes, str(porcoes)) for porcoes in range(1, 21)]
+
+    servings_steps = forms.ChoiceField(
+        required=True,
+        label='Quantidade de Rendimento',
+        choices=porcoes_choices,
+    )
+    tempo_choices = [(porcoes, str(porcoes)) for porcoes in range(1, 61)]
+    preparation_time = forms.ChoiceField(
+        label='Tempo de preparo',
+        choices=tempo_choices
+    )
+
+    preparation_time_unit = forms.CharField(
+        required=True,
+        label='Unidade de Tempo de Preparo',
+        widget = forms.Select(
+            choices=(
+                ('minutos', 'Minutos'),
+                ('horas', 'Horas'),
+            )
+        )
+    )
+
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        required=True,
+        label='Categoria',
+        empty_label='Selecione a categoria',
+    )
+
+    preparation_steps = forms.CharField(
+        required=True,
+        label='Ingredientes e Passo a Passo',
+        widget=forms.Textarea()
+    )
+
+    def clean(self):
+        super_clean = super().clean()
+
+        cleanded_data = self.cleaned_data
+        tittle = super_clean.get('tittle')
+        description = super_clean.get('description')
+
+
+        if len(tittle) < 5:
+            self.my_errors['tittle'].append('Deve ao menos 5 catacteres')
+
+        if tittle == description:
+            self.my_errors['tittle'].append('Titulo nao deve ser igual a Descrição')
+            self.my_errors['description'].append('Descrição nao deve ser igual ao Titulo ')
+
+
+
+
+
+
+        if self.my_errors:
+            raise ValidationError(self.my_errors)
+        return super_clean
+

@@ -4,7 +4,31 @@
 {{ request.user.username }}
 {% endblock %}
 {% block body %}
-<h3>Bem Vindo {{ request.user.username }} ! </h3>
+<h2 class="center text-user-perfil">Bem Vindo {{ request.user.username }}! </h2>
+{% if messages %}
+  <div class="center">
+    {% for message in messages %}
+      <div class="message {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<div class="form-group form-content-grid center">
+    <a href="{% url 'authors:receitas_publicadas' %}">
+      <button type="button">Receitas publicadas</button>
+    </a>
+</div>
+<div class="form-group form-content-grid center">
+    <a href="{% url 'authors:receitas_em_revisao' %}">
+      <button type="button">Receitas em Revisão</button>
+    </a>
+</div>
+<div class="form-group form-content-grid center">
+    <a href="{% url 'authors:cadastrar_receitas' %}">
+      <button type="button">Cadastrar Receita</button>
+    </a>
+</div>
+
 <form action="{% url 'authors:logout' %}" method="post">
     {% csrf_token %}
     <input type="hidden" name="username" value="{{ request.user.username }}">
@@ -12,4 +36,5 @@
         <button type="submit">Sair</button>
     </div>
 </form>
+
 {% endblock %}

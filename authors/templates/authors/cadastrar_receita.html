@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Cadastrar Receita
+{% endblock %}
+{% block body %}
+<div class="main-content container">
+    <h2 class="center text-user-perfil">Cadastrar Receita</h2>
+    <form action="{% url 'authors:cadastrar_receitas' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'partials/forms.html' %}
+        {% if form.errors %}
+        <div class="form-content form-content-grid">
+            <div class="form-group">
+                <div class="message message-error">
+                    Não foi possível Cadastrar essa receita. Verifique os campos e tente novamente.
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="form-group form-content-grid center">
+            <button type="submit">Cadastrar</button>
+        </div>
+        <div class="form-group form-content-grid center">
+            <a href="{% url 'authors:pagina_de_usuario' %}">
+                <button type="button">Voltar</button>
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

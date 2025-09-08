@@ -11,4 +11,15 @@
             {% include 'recipes/partials/recipe.html' %}
         </div>
     </div>
+    <div class="form-group form-content-grid center">
+        {% if request.resolver_match.url_name == "receitas_em_revisao" %}
+            <a href="{% url 'authors:receitas_em_revisao' %}">
+              <button type="button">Voltar</button>
+            </a>
+        {% endif %}
+
+        <a href="{% url 'recipes:home' %}?page={{ page }}">
+          <button type="button">Voltar</button>
+        </a>
+    </div>
 {% endblock %}

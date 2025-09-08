@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+receitas em revisao {{ request.user.username }}
+{% endblock %}
+{% block body %}
+{% include 'recipes/partials/search.html' %}
+<h2 class="center text-user-perfil">Receitas em Revisão de {{ request.user.username }}! </h2>
+<div class="main-content-container">
+    <div class="main-content main-content-list container">
+        {% for recipe in recipes %}
+            {% if recipe.author == request.user %}
+                {% include 'recipes/partials/recipe.html' %}
+        {% endif %}
+        {% empty %}
+            <h1>Nenhuma Receita a ser Revisada</h1>
+        {% endfor %}
+    </div>
+    <div class="form-group form-content-grid center">
+        <a href="{% url 'authors:pagina_de_usuario' %}">
+          <button type="button">Voltar</button>
+        </a>
+    </div>
+</div>
+{% endblock %}
