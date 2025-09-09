@@ -1,6 +1,4 @@
 import re
-from idlelib.debugobj import myrepr
-
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -212,8 +210,8 @@ class CadastrarReceitaForm(forms.ModelForm):
         super_clean = super().clean()
 
         cleanded_data = self.cleaned_data
-        tittle = super_clean.get('tittle')
-        description = super_clean.get('description')
+        tittle = cleanded_data.get('tittle')
+        description = cleanded_data.get('description')
 
 
         if len(tittle) < 5:
@@ -222,9 +220,6 @@ class CadastrarReceitaForm(forms.ModelForm):
         if tittle == description:
             self.my_errors['tittle'].append('Titulo nao deve ser igual a Descrição')
             self.my_errors['description'].append('Descrição nao deve ser igual ao Titulo ')
-
-
-
 
 
 

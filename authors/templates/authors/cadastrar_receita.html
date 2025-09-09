@@ -9,16 +9,6 @@ Cadastrar Receita
     <form action="{% url 'authors:cadastrar_receitas' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% include 'partials/forms.html' %}
-        {% if form.errors %}
-        <div class="form-content form-content-grid">
-            <div class="form-group">
-                <div class="message message-error">
-                    Não foi possível Cadastrar essa receita. Verifique os campos e tente novamente.
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
         <div class="form-group form-content-grid center">
             <button type="submit">Cadastrar</button>
         </div>

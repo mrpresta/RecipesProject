@@ -119,7 +119,7 @@ def cadastrar_receita(request):
 
             return redirect('authors:pagina_de_usuario')
         else:
-            messages.error(request, 'Erro ao salvar recipe. Verifique os campos e tente novamente.')
+            messages.error('Receita nao cadastrada. Verifique os campos e tente novamente')
     else:
         form = CadastrarReceitaForm()
 

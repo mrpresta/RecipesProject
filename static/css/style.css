@@ -91,8 +91,26 @@ h6 {
     margin: 0 auto;
 }
 .main-logo-icon {
+    justify-content: flex-end;
     margin-right: 2rem;
 }
+
+.logar-cadastrar-links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.logar-cadastrar-links a:hover{
+    color:  var(--color-primary);
+
+}
+.login,
+.cadastrar{
+    font-size: 2rem;
+}
+
+
 
 /* area de search */
 .search-form{
@@ -327,6 +345,9 @@ h6 {
     .form-content-grid{
         grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     }
+    .logar-cadastrar-links{
+        align-item:center;
+    }
 }
 
 /* formularios */
@@ -454,9 +475,24 @@ form-group a {
 }
 .h1-login-cadastro{
     color: var(--color-primary-dark);
-    padding:2rem;
+    padding: 2rem;
     text-align: center;
 }
 .span2 {
     grid-column: span 2;
 }
+
+button.recipe-read-more {
+    padding: 1.5rem;
+    font-size: 1.6rem;
+    width: 100%;
+    border:none;
+    background: var(--color-primary-dark);
+    color: var(--color-white);
+    align-items: center;
+}
+
+button.recipe-read-more:hover{
+    filter: brightness(2);
+}
+

@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
     <title>{% block title %} base {% endblock %} | Recipes </title>
     {% include 'partials/head.html' %}
+
     </head>
     <body>
         {% include 'partials/header.html' %}
@@ -13,5 +15,9 @@
         {% include 'partials/pagination.html' %}
 
         {% include 'partials/footer.html' %}
+
+    {% block scripts %}
+        <script src="{% static 'js/scripts.js' %}"></script>
+    {% endblock %}
     </body>
 </html>
